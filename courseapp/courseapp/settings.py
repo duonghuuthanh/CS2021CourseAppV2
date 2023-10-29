@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'courses.apps.CoursesConfig'
+    'courses.apps.CoursesConfig',
+    'ckeditor',
+    'ckeditor_uploader'
 ]
+
+CKEDITOR_UPLOAD_PATH = "ckeditors/images/"
 
 AUTH_USER_MODEL = 'courses.User'
 
@@ -88,6 +92,7 @@ DATABASES = {
     }
 }
 
+MEDIA_ROOT = '%s/courses/static/' % BASE_DIR
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
