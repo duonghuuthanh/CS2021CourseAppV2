@@ -1,7 +1,7 @@
-from rest_framework import viewsets, generics, status
+from rest_framework import viewsets, generics, status, parsers, permissions
 from rest_framework.decorators import action
 from rest_framework.views import Response
-from courses.models import Category, Course
+from courses.models import Category, Course, Lesson, User
 from courses import serializers, paginators
 
 
@@ -35,4 +35,25 @@ class CourseView(viewsets.ViewSet, generics.ListAPIView):
         return Response(serializers.LessonSerializer(lessons, many=True,
                                                      context={'request': request}).data,
                         status=status.HTTP_200_OK)
+
+
+class LessonViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
+    queryset = Lesson.objects.filter(active=True).all()
+    serializer_class = serializers.LessonSerializer
+
+
+class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
+    queryset = User.objects.filter(is_active=True)
+    serializer_class = serializers.UserSerializer
+    parser_classes = [parsers.MultiPartParser]
+
+    def get_permissions(self):
+        if self.action.__eq__("current_user"):
+            return [permissions.IsAuthenticated()]
+
+        return [permissions.AllowAny()]
+
+    @action(methods=['get'], detail=False)
+    def current_user(self, request):
+        return Response(serializers.UserSerializer(request.user).data)
 
