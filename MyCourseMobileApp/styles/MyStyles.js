@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        margin: 5,
-        marginTop: 50,
+        margin: 5
     }, row: {
         flexDirection: "row"
     }, subject: {
@@ -17,5 +16,8 @@ export default StyleSheet.create({
     }, title: {
         fontSize: 16,
         fontWeight: "bold"
+    }, thumb: {
+        width: 120,
+        height: 120
     }
 });
