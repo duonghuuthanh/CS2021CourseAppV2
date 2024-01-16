@@ -19,5 +19,17 @@ export default StyleSheet.create({
     }, thumb: {
         width: 120,
         height: 120
+    }, name: {
+        color: "green"
+    }, input: {
+        width: 300,
+        backgroundColor: "lightgray",
+        padding: 6,
+        margin: 5
+    }, button: {
+        backgroundColor: "orange",
+        color: "darkblue",
+        padding: 10,
+       
     }
 });
